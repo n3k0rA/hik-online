@@ -1,0 +1,96 @@
+%p#notice= notice
+
+%p
+  %b Id:
+  = @event.id
+%p
+  %b Title:
+  = @event.title
+%p
+  %b Start date:
+  = @event.start_date
+%p
+  %b Finish date:
+  = @event.finish_date
+%p
+  %b Place:
+  = @event.place
+%p
+  %b Town:
+  = @event.town
+%p
+  %b Price:
+  = @event.price
+%p
+  %b Description:
+  = @event.description
+%p
+  %b Email:
+  = @event.email
+%p
+  %b Website:
+  = @event.website
+%p
+  %b Phone:
+  = @event.phone
+%p
+  %b Created at:
+  = @event.created_at
+%p
+  %b Updated at:
+  = @event.updated_at
+%p
+  %b User:
+  = @event.user_id
+%p
+  %b Address:
+  = @event.address
+%p
+  %b Des es:
+  = @event.des_es
+%p
+  %b Des eu:
+  = @event.des_eu
+%p
+  %b Des en:
+  = @event.des_en
+%p
+  %b Des fr:
+  = @event.des_fr
+%p
+  %b Views:
+  = @event.views
+%p
+  %b Title es:
+  = @event.title_es
+%p
+  %b Title eu:
+  = @event.title_eu
+%p
+  %b Title en:
+  = @event.title_en
+%p
+  %b Title fr:
+  = @event.title_fr
+%p
+  %b Approved:
+  = @event.approved
+%p
+  %b Reminded:
+  = @event.reminded
+%p
+  %b Cancelled:
+  = @event.cancelled
+%p
+  %b Cancel message:
+  = @event.cancel_message
+%p
+  %b Province:
+  = @event.province
+%p
+  %b Tickets:
+  = @event.tickets
+
+= link_to 'Edit', edit_event_path(@event)
+\|
+= link_to 'Back', events_path

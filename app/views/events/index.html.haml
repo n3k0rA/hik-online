@@ -1,0 +1,77 @@
+%h1 Listing events
+
+%table
+  %tr
+    %th Id
+    %th Title
+    %th Start date
+    %th Finish date
+    %th Place
+    %th Town
+    %th Price
+    %th Description
+    %th Email
+    %th Website
+    %th Phone
+    %th Created at
+    %th Updated at
+    %th User
+    %th Address
+    %th Des es
+    %th Des eu
+    %th Des en
+    %th Des fr
+    %th Views
+    %th Title es
+    %th Title eu
+    %th Title en
+    %th Title fr
+    %th Approved
+    %th Reminded
+    %th Cancelled
+    %th Cancel message
+    %th Province
+    %th Tickets
+    %th
+    %th
+    %th
+
+  - @events.each do |event|
+    %tr
+      %td= event.id
+      %td= event.title
+      %td= event.start_date
+      %td= event.finish_date
+      %td= event.place
+      %td= event.town
+      %td= event.price
+      %td= event.description
+      %td= event.email
+      %td= event.website
+      %td= event.phone
+      %td= event.created_at
+      %td= event.updated_at
+      %td= event.user_id
+      %td= event.address
+      %td= event.des_es
+      %td= event.des_eu
+      %td= event.des_en
+      %td= event.des_fr
+      %td= event.views
+      %td= event.title_es
+      %td= event.title_eu
+      %td= event.title_en
+      %td= event.title_fr
+      %td= event.approved
+      %td= event.reminded
+      %td= event.cancelled
+      %td= event.cancel_message
+      %td= event.province
+      %td= event.tickets
+      %td= link_to 'Show', event
+      %td= link_to 'Edit', edit_event_path(event)
+      %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Event', new_event_path

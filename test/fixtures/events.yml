@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  title: MyString
+  start_date: 2013-01-09 18:48:53
+  finish_date: 2013-01-09 18:48:53
+  place: MyString
+  town: MyString
+  price: 9.99
+  description: MyText
+  email: MyString
+  website: MyString
+  phone: MyString
+  created_at: 2013-01-09 18:48:53
+  updated_at: 2013-01-09 18:48:53
+  user_id: 1
+  address: MyString
+  des_es: MyText
+  des_eu: MyText
+  des_en: MyText
+  des_fr: MyText
+  views: 1
+  title_es: MyString
+  title_eu: MyString
+  title_en: MyString
+  title_fr: MyString
+  approved: false
+  reminded: false
+  cancelled: false
+  cancel_message: MyText
+  province: MyString
+  tickets: MyString
+
+two:
+  id: 1
+  title: MyString
+  start_date: 2013-01-09 18:48:53
+  finish_date: 2013-01-09 18:48:53
+  place: MyString
+  town: MyString
+  price: 9.99
+  description: MyText
+  email: MyString
+  website: MyString
+  phone: MyString
+  created_at: 2013-01-09 18:48:53
+  updated_at: 2013-01-09 18:48:53
+  user_id: 1
+  address: MyString
+  des_es: MyText
+  des_eu: MyText
+  des_en: MyText
+  des_fr: MyText
+  views: 1
+  title_es: MyString
+  title_eu: MyString
+  title_en: MyString
+  title_fr: MyString
+  approved: false
+  reminded: false
+  cancelled: false
+  cancel_message: MyText
+  province: MyString
+  tickets: MyString

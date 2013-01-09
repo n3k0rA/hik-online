@@ -1,0 +1,100 @@
+= form_for @event do |f|
+  - if @event.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :id
+    = f.number_field :id
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :start_date
+    = f.datetime_select :start_date
+  .field
+    = f.label :finish_date
+    = f.datetime_select :finish_date
+  .field
+    = f.label :place
+    = f.text_field :place
+  .field
+    = f.label :town
+    = f.text_field :town
+  .field
+    = f.label :price
+    = f.text_field :price
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :website
+    = f.text_field :website
+  .field
+    = f.label :phone
+    = f.text_field :phone
+  .field
+    = f.label :created_at
+    = f.datetime_select :created_at
+  .field
+    = f.label :updated_at
+    = f.datetime_select :updated_at
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :address
+    = f.text_field :address
+  .field
+    = f.label :des_es
+    = f.text_area :des_es
+  .field
+    = f.label :des_eu
+    = f.text_area :des_eu
+  .field
+    = f.label :des_en
+    = f.text_area :des_en
+  .field
+    = f.label :des_fr
+    = f.text_area :des_fr
+  .field
+    = f.label :views
+    = f.number_field :views
+  .field
+    = f.label :title_es
+    = f.text_field :title_es
+  .field
+    = f.label :title_eu
+    = f.text_field :title_eu
+  .field
+    = f.label :title_en
+    = f.text_field :title_en
+  .field
+    = f.label :title_fr
+    = f.text_field :title_fr
+  .field
+    = f.label :approved
+    = f.check_box :approved
+  .field
+    = f.label :reminded
+    = f.check_box :reminded
+  .field
+    = f.label :cancelled
+    = f.check_box :cancelled
+  .field
+    = f.label :cancel_message
+    = f.text_area :cancel_message
+  .field
+    = f.label :province
+    = f.text_field :province
+  .field
+    = f.label :tickets
+    = f.text_field :tickets
+  .actions
+    = f.submit 'Save'
