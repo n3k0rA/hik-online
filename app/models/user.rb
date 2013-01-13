@@ -13,11 +13,14 @@ class User < ActiveRecord::Base
   #validates_attachment_size :avatar, :less_than => 5.megabytes    
   has_attached_file :avatar,
     :styles => { :original => "1024x1024>", :medium => "300x300>", :thumb => "100x100>" },
+    :storage =>  Rails.env.production? ? :s3 : :filesystem,
     :s3_credentials => {
       :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
      },
+    
     :bucket => ENV['S3_BUCKET_NAME']
+    
   
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
