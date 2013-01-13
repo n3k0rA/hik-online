@@ -1,7 +1,11 @@
 
 =@user.name
 =@user.email
+thumb
 = image_tag @user.avatar.url(:thumb)
+medieum
 = image_tag @user.avatar.url(:medium)
+origininal
 = image_tag @user.avatar.url(:original)
+none
 = image_tag @user.avatar.url

@@ -90,6 +90,15 @@
 %p
   %b Tickets:
   = @event.tickets
+  
+  thumb
+  = image_tag @event.pic.url(:thumb)
+  medieum
+  = image_tag @event.pic.url(:medium)
+  origininal
+  = image_tag @event.pic.url(:original)
+  none
+  = image_tag @event.pic.url
 
 = link_to 'Edit', edit_event_path(@event)
 \|

@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
     :uid, :name, :gender, :town, :avatar
   
   #Paperclip
-  #validates_attachment_size :avatar, :less_than => 5.megabytes    
+  validates_attachment_size :avatar, :less_than => 5.megabytes    
+  validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png']
   has_attached_file :avatar,
     :styles => { :original => "1024x1024>", :medium => "300x300>", :thumb => "100x100>" },
     :storage => Rails.env.production? ? :s3 : :filesystem,
