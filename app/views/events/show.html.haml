@@ -95,10 +95,15 @@
   = image_tag @event.pic.url(:thumb)
   medieum
   = image_tag @event.pic.url(:medium)
+  big
+  = image_tag @event.pic.url(big)
   origininal
   = image_tag @event.pic.url(:original)
   none
   = image_tag @event.pic.url
+  #photo_box
+    within a box
+    = image_tag @event.pic.url(big)
 
 = link_to 'Edit', edit_event_path(@event)
 \|
