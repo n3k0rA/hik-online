@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar,
     :styles => { :original => "1024x1024>", :medium => "300x300>", :thumb => "100x100>" },
     :storage => :s3,
-    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+    :s3_credentials => S3_CREDENTIALS,
     
     :bucket => ENV['S3_BUCKET_NAME'],
     :path => "appname/:attachment/:style/:id.:extension"
