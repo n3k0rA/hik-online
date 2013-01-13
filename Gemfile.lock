@@ -169,7 +169,7 @@ DEPENDENCIES
   metamagic
   omniauth
   omniauth-facebook (= 1.4.0)
-  paperclip
+  paperclip (~> 3.0)
   pg
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
