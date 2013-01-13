@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
   
   #Paperclip
   #validates_attachment_size :avatar, :less_than => 5.megabytes    
-  has_attached_file :avatar
+  has_attached_file :avatar,
+  :styles => { :original => "1024x1024>", :medium => "300x300>", :thumb => "100x100>" },
+  
   
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
