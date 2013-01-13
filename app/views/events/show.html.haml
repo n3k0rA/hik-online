@@ -101,9 +101,10 @@
   = image_tag @event.pic.url(:original)
   none
   = image_tag @event.pic.url
-  #photo_box
-    within a box
-    = image_tag @event.pic.url(:big)
+  #set_w
+    #photo_box
+      within a box
+      = image_tag @event.pic.url(:big)
 
 = link_to 'Edit', edit_event_path(@event)
 \|
