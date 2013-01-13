@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   validates_attachment_size :pic, :less_than => 5.megabytes    
   validates_attachment_content_type :pic, :content_type => ['image/jpeg', 'image/png']
   has_attached_file :pic, :styles =>
-            { :original => "1024x1024>", :big =>"535x535>" :medium => "300x300>", :thumb => "100x100>"},
+            { :original => "1024x1024>", :big =>"535x535>", :medium => "300x300>", :thumb => "100x100>"},
             :storage => Rails.env.production? ? :s3 : :filesystem,
             :s3_credentials => {
               :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
