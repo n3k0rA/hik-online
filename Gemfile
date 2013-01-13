@@ -35,7 +35,7 @@ gem 'headliner'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
-gem "paperclip"
+gem "paperclip", "~> 3.0"
 gem "aws-s3"
 
 

@@ -10,11 +10,9 @@ class User < ActiveRecord::Base
     :uid, :name, :gender, :town, :avatar
   
   #Paperclip
-  validates_attachment_size :avatar, :less_than => 5.megabytes    
+  #validates_attachment_size :avatar, :less_than => 5.megabytes    
   has_attached_file :avatar,
-  :styles => {:thumb => {:geometry => '100x100>', :format => :jpg}, 
-  :medium => {:geometry => '300x300>', :format => :jpg},
-  :original => {:geometry => '1024x1024>', :format => :jpg}},
+  :styles => { :original => "1024x1024>", :medium => "300x300>", :thumb => "100x100>" },
   :storage =>  Rails.env.production? ? :s3 : :filesystem,
   :s3_credentials => {
     :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
