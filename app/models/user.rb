@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   #Paperclip
   #validates_attachment_size :avatar, :less_than => 5.megabytes    
   has_attached_file :avatar,
-  :styles => { :original => "1024x1024>", :medium => "300x300>", :thumb => "100x100>" },
+    :styles => { :original => "1024x1024>", :medium => "300x300>", :thumb => "100x100>" }
   
   
   
