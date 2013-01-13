@@ -19,8 +19,7 @@
           |
           =link_to 'Log in', new_user_session_path
           |
-          #sign_i
-            = link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook)
+          = link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in" 
     %p.notice= notice
     %p.alert= alert
     = yield

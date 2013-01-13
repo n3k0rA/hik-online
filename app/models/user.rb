@@ -5,9 +5,27 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :lockable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
 
+  attr_accessor :current_password
+  
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid, :name
+  attr_accessible :current_password, :email, :password, :password_confirmation, :remember_me, :provider, 
+    :uid, :name, :gender, :town, :avatar
   # attr_accessible :title, :body
+  
+  #Paperclip
+  validates_attachment_size :avatar, :less_than => 3.megabytes    
+  has_attached_file :avatar,
+  :styles => {:thumb => {:geometry => '100x100>', :format => :jpg}, 
+  :medium => {:geometry => '300x300>', :format => :jpg},
+  :original => {:geometry => '1024x1024>', :format => :jpg}},
+  :storage =>  Rails.env.production? ? :s3 : :filesystem,
+  :s3_credentials => {
+    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+   },
+  :path => ":attachment/:id/:style.:extension",
+  :bucket => ENV['S3_BUCKET_NAME'],
+  :default_url => '/images/missing_:style.jpg'
   
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -18,6 +36,8 @@ class User < ActiveRecord::Base
                            provider:auth.provider,
                            uid:auth.uid,
                            email:auth.info.email,
+                           gender:auth.extra.raw_info.gender,
+                           town:auth.extra.raw_info.location,
                            password:Devise.friendly_token[0,20]
                            )
       user.skip_confirmation!

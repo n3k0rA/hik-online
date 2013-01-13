@@ -27,13 +27,16 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'dotenv', :groups => [:development, :test]
 gem 'jquery-rails'
 gem 'haml'
 gem 'metamagic'
 gem 'headliner'
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
+gem "paperclip"
+gem "aws-s3"
 
 
 
