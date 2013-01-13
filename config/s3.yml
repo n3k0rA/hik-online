@@ -1,0 +1,9 @@
+development:
+  bucket: bucketname
+  access_key_id: key
+  secret_access_key: key
+
+production:
+  bucket: hik-online
+  access_key_id: AKIAI32MEGTBZ4SSFOSA
+  secret_access_key: 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
