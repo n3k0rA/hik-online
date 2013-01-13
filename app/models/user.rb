@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable,
-  # , :timeoutable and 
+  # Devise
   devise :database_authenticatable, :registerable, :lockable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
 
@@ -10,10 +8,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :current_password, :email, :password, :password_confirmation, :remember_me, :provider, 
     :uid, :name, :gender, :town, :avatar
-  # attr_accessible :title, :body
   
   #Paperclip
-  validates_attachment_size :avatar, :less_than => 3.megabytes    
+  validates_attachment_size :avatar, :less_than => 5.megabytes    
   has_attached_file :avatar,
   :styles => {:thumb => {:geometry => '100x100>', :format => :jpg}, 
   :medium => {:geometry => '300x300>', :format => :jpg},
