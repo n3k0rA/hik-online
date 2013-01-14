@@ -1,103 +1,157 @@
-= form_for @event do |f|
+= form_for(@event) do |f|
   - if @event.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+      %h2
+        = pluralize(@event.errors.count, "error")
+        =t :event_form_error
+        //prohibited this event from being saved:
       %ul
         - @event.errors.full_messages.each do |msg|
           %li= msg
+          
+          
+  #tabs 
+    -if I18n.locale.to_s=="en" 
+      %ul
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+    -elsif I18n.locale.to_s=="eu" 
+      %ul
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+    -elsif I18n.locale.to_s=="fr" 
+      %ul
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+    -else
+      %ul
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+    
+    #tabs-1
+      %p
+        .field
+          = f.label "Titulo del Evento"
+          = f.text_field :title_es, :class=>"total_width"
+        %br
+        .field
+          = f.label "Descripcion del Evento"
+          %br
+          = f.text_area :des_es, :rows => 15, :class=>"total_width"
+    #tabs-2
+      %p
+        .field
+          = f.label "Ekitaldiaren Titulua"
+          = f.text_field :title_eu, :class=>"total_width"
+        %br
+        .field
+          = f.label "Ekitaldiaren Deskripzioa"
+          %br
+          = f.text_area :des_eu, :rows => 15, :class=>"total_width"
+    #tabs-3
+      %p
+        .field
+          = f.label "Titre de L'événement"
+          = f.text_field :title_fr, :class=>"total_width"
+        %br
+        .field
+          = f.label "Descripcion de L'événement"
+          %br
+          = f.text_area :des_fr, :rows => 15, :class=>"total_width"
+    #tabs-4
+      %p
+        .field
+          = f.label "Event Title"
+          = f.text_field :title_en, :class=>"total_width"
+        %br
+        .field
+          = f.label "Event Description"
+          %br
+          = f.text_area :des_en, :rows => 15, :class=>"total_width"
+        
+        
+        
+  
+  = f.label t :event_categories
+  - Category.all.each do |category|
+    .field
+      = check_box_tag "category_ids[]", category.id, @event.category_ids.include?(category.id)
+      = I18n.t("categories.#{category.name}")
+  
 
   .field
-    = f.label :id
-    = f.number_field :id
+    = f.label t :event_start_date
+    %br
+    = f.text_field :start_date, :class=>"datetime_box"
   .field
-    = f.label :title
-    = f.text_field :title
+    = f.label t :event_finish_date
+    %br
+    = f.text_field :finish_date, :class=>"datetime_box"
   .field
-    = f.label :start_date
-    = f.datetime_select :start_date
-  .field
-    = f.label :finish_date
-    = f.datetime_select :finish_date
-  .field
-    = f.label :place
+    = f.label t :event_place
+    %br
     = f.text_field :place
   .field
-    = f.label :town
-    = f.text_field :town
-  .field
-    = f.label :price
-    = f.text_field :price
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :website
-    = f.text_field :website
-  .field
-    = f.label :phone
-    = f.text_field :phone
-  .field
-    = f.label :created_at
-    = f.datetime_select :created_at
-  .field
-    = f.label :updated_at
-    = f.datetime_select :updated_at
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :address
+    = f.label t :event_address
+    %br
     = f.text_field :address
   .field
-    = f.label :des_es
-    = f.text_area :des_es
+    = f.label t :event_town
+    %br
+    = f.text_field :town
   .field
-    = f.label :des_eu
-    = f.text_area :des_eu
+    = f.label t :event_province
+    %br
+    = select(:event, :province, Event::PROVINCES.collect {|d| [I18n.t(d), d]})
+    
   .field
-    = f.label :des_en
-    = f.text_area :des_en
+    = f.label t :event_price
+    %br
+    = f.number_field :price
+
   .field
-    = f.label :des_fr
-    = f.text_area :des_fr
+    = f.label t :email
+    %br
+    = f.email_field :email
   .field
-    = f.label :views
-    = f.number_field :views
+    = f.label t :event_website
+    %br
+    = f.text_field :website
   .field
-    = f.label :title_es
-    = f.text_field :title_es
+    = f.label t :event_phone
+    %br
+    = f.telephone_field :phone
   .field
-    = f.label :title_eu
-    = f.text_field :title_eu
-  .field
-    = f.label :title_en
-    = f.text_field :title_en
-  .field
-    = f.label :title_fr
-    = f.text_field :title_fr
-  .field
-    = f.label :approved
-    = f.check_box :approved
-  .field
-    = f.label :reminded
-    = f.check_box :reminded
-  .field
-    = f.label :cancelled
-    = f.check_box :cancelled
-  .field
-    = f.label :cancel_message
-    = f.text_area :cancel_message
-  .field
-    = f.label :province
-    = f.text_field :province
-  .field
-    = f.label :tickets
-    = f.text_field :tickets
-  .field
-    = f.label :pic
+    = f.label :Tickets_Online
+    %br
+    = f.telephone_field :tickets
+  %p
+    = f.label t :event_pic
+    %br
     = f.file_field :pic
   .actions
-    = f.submit 'Save'
+    = f.submit

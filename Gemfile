@@ -38,7 +38,7 @@ gem 'omniauth-facebook', '1.4.0'
 gem "paperclip", "~> 3.0"
 gem "aws-s3"
 gem "aws-sdk"
-
+gem 'validates_timeliness'
 
 
 # To use ActiveModel has_secure_password

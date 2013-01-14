@@ -16,6 +16,8 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+    @event.views = @event.views +1
+    
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,10 +44,13 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
+    categories = params[:category_ids] or []
+    @event = Event.new(params[:event].merge(:user_id => current_user.id, :category_ids => categories))
+    check_date
 
     respond_to do |format|
       if @event.save
+        #Mailer to seek appoval
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
       else
@@ -80,6 +85,24 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to events_url }
       format.json { head :no_content }
+    end
+  end
+  
+private 
+
+  # Set the event to 'reminded'
+  def check_date
+    if close_date
+      @event.reminded = true
+    end
+  end
+  
+  # Checks whether an event is happening in less than 72h
+  def close_date
+    if ((@event.start_date-Time.now)< 259146.01469397545)
+      true
+    else 
+      false
     end
   end
 end

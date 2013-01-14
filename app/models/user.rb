@@ -1,13 +1,19 @@
 class User < ActiveRecord::Base
+  
   # Devise
   devise :database_authenticatable, :registerable, :lockable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
 
   attr_accessor :current_password
+  validates_presence_of :name
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :current_password, :email, :password, :password_confirmation, :remember_me, :provider, 
     :uid, :name, :gender, :town, :avatar
+  
+  has_many :created_events, :class_name => "Event", :foreign_key => "user_id"
+  
+  
   
   #Paperclip
   validates_attachment_size :avatar, :less_than => 5.megabytes    
@@ -24,7 +30,10 @@ class User < ActiveRecord::Base
     :default_url => "/images/default_:style_photo.png"
     
   
-  
+  #Sets the values for the Province select field 
+  PROVINCES = ["alaba", "biscay", "guipuzkoa", "navarre", "labourd", "b_navarre", "soule"]
+    
+    
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first || User.where(:email => auth.info.email).first
     
@@ -49,6 +58,8 @@ class User < ActiveRecord::Base
       end
     end
   end
+  
+  
   
   
 end
