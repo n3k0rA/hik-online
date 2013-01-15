@@ -1,7 +1,7 @@
+<!DOCTYPE html>
 
 
-
-%html{:xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", "xml:lang" => "en"}<!DOCTYPE html>
+%html{:xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", "xml:lang" => "en"}
 
 
 %html
@@ -12,22 +12,44 @@
     
     = javascript_include_tag "application"
     = csrf_meta_tags
+    =I18n.locale.to_s
+    -if I18n.locale.to_s == "es"
+      =javascript_include_tag "datepicker/ui.datepicker-es"
+    -elsif I18n.locale.to_s == "eu"
+      =javascript_include_tag "datepicker/ui.datepicker-eu"
+    -elsif I18n.locale.to_s == "fr"
+      =javascript_include_tag "datepicker/ui.datepicker-fr"
     
-  %body
-    #container
-      #user_nav
-        -if user_signed_in?
-          Logged in as
-          = current_user.email
-          =link_to 'Edit profile', edit_user_registration_path
-          |
-          =link_to "Logout", destroy_user_session_path, method: :delete
-        -else
-          =link_to "Sign up", new_user_registration_path
-          |
-          =link_to 'Log in', new_user_session_path
-          |
-          = link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in" 
+    %body{:class => "#{controller.controller_name} container"}
+      .container
+        #header
+          .wrap
+            #logo
+
+              - logo_tag = image_tag("hikultura_paisvasco_euskadi_jaia_cultura_small.png", :alt => "HiKultura Logo HiKultura.com", :class => "logo_size")
+              = link_to logo_tag, root_path
+              #slogan.capital
+                =t :slogan
+
+            #header_right
+              #login
+                #user_nav
+                  - if user_signed_in?
+                    .sign 
+                      = link_to truncate(current_user.name, :length=>10), current_user
+                    .log
+                      = link_to I18n.t(:log_out), destroy_user_session_path, method: :delete
+                  - else
+                    .sign
+                      = link_to I18n.t(:sign_up), new_user_registration_path
+                    .log
+                      = link_to I18n.t(:log_in), new_user_session_path
+                    = link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in" 
+                #lang
+                  - [:es, :eu, :fr, :en].each do |locale|
+                    %li= link_to locale, url_for(locale: locale)
+                    
+       
     %p.notice= notice
     %p.alert= alert
     = yield

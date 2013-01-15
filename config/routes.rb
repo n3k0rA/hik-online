@@ -2,12 +2,22 @@ Hikultura::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
     :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
 
-  resources :events
-  resources :users
+  
 
   devise_scope :user do match 'auth/facebook/callback', to: 'users/omniauth_callbacks#facebook'
   end
 
+  scope "(:locale)", :locale => /es|eu|fr|en/ do
+    resources :events
+    resources :users
+    resources :categories
+  end
+  
+  # Root path
+  match '/?locale=es' => 'events#index'
+  match '/?locale=eu' => 'events#index'
+  match '/?locale=fr' => 'events#index'
+  match '/?locale=en' => 'events#index'
   root :to => 'events#index'
   
   
