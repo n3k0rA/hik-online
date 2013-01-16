@@ -38,34 +38,24 @@
 
   - @events.each do |event|
     %tr
-      %td= event.id
-      %td= event.title
       %td= event.start_date
       %td= event.finish_date
       %td= event.place
       %td= event.town
       %td= event.price
-      %td= event.description
       %td= event.email
       %td= event.website
       %td= event.phone
-      %td= event.created_at
-      %td= event.updated_at
       %td= event.user_id
       %td= event.address
       %td= event.des_es
       %td= event.des_eu
       %td= event.des_en
       %td= event.des_fr
-      %td= event.views
       %td= event.title_es
       %td= event.title_eu
       %td= event.title_en
       %td= event.title_fr
-      %td= event.approved
-      %td= event.reminded
-      %td= event.cancelled
-      %td= event.cancel_message
       %td= event.province
       %td= event.tickets
       %td= link_to 'Show', event

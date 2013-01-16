@@ -39,7 +39,7 @@ gem "paperclip", "~> 3.0"
 gem "aws-s3"
 gem "aws-sdk"
 gem 'validates_timeliness'
-
+gem 'friendly_id'
 
 
 # To use ActiveModel has_secure_password

@@ -1,4 +1,7 @@
 class Event < ActiveRecord::Base  
+  extend FriendlyId
+  friendly_id :title_with_id, use: [:slugged, :history]
+  
   attr_accessible :address, :cancel_message, :des_en, :des_es, :des_eu, :des_fr, 
   :email, :finish_date, :phone, :place, :price, :province, :start_date, 
   :tickets, :title, :title_en, :title_es, :title_eu, :title_fr, :town,
@@ -43,5 +46,19 @@ class Event < ActiveRecord::Base
       errors.add(:des_es, "Please fill in the title at least in one language")
     end
   end
+  
+  protected
+  
+    def title_with_id
+      if I18n.locale.to_s == "es" && !title_es.empty? 
+        title_es
+      elsif I18n.locale.to_s == "eu" && !title_eu.empty? 
+        title_eu
+      elsif I18n.locale.to_s == "fr" && !title_fr.empty? 
+        title_fr
+      else
+        title_en
+      end
+    end
   
 end
