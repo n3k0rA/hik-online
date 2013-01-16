@@ -16,8 +16,8 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    @event.views = @event.views +1
-    
+    @event.views = @event.views + 1
+    @event.save
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,7 +29,7 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
     @event = Event.new
-
+    @event.price = 0
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @event }
@@ -46,6 +46,7 @@ class EventsController < ApplicationController
   def create
     categories = params[:category_ids] or []
     @event = Event.new(params[:event].merge(:user_id => current_user.id, :category_ids => categories))
+    @event.views = 0
     check_date
 
     respond_to do |format|
@@ -80,6 +81,7 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
+    @event.categories .delete
     @event.destroy
 
     respond_to do |format|

@@ -11,6 +11,8 @@ Hikultura::Application.routes.draw do
     resources :events
     resources :users
     resources :categories
+    
+    match 'events/:id' => 'events/:id/:price'
   end
   
   # Root path

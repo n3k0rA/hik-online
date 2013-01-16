@@ -2,14 +2,16 @@ class Event < ActiveRecord::Base
   attr_accessible :address, :cancel_message, :des_en, :des_es, :des_eu, :des_fr, 
   :email, :finish_date, :phone, :place, :price, :province, :start_date, 
   :tickets, :title, :title_en, :title_es, :title_eu, :title_fr, :town,
-  :website, :pic
+  :website, :pic, :user_id, :category_ids
   
   belongs_to :user
+  has_and_belongs_to_many :categories
   
   validates_datetime :finish_date, :after => :start_date
   validates_datetime :finish_date, :on_or_after => lambda { Date.current }
   validates :town, presence: true
   validate :the_event_must_have_at_least_one_description
+  validates :price, numericality: {greater_than_or_equal_to: 0}
   scope :start_between, lambda{|from, to| where ["start_date BETWEEN ? and ?", from.to_date - 1, to.to_date + 1] }
   
   
@@ -38,7 +40,7 @@ class Event < ActiveRecord::Base
       errors.add(:des_es, "Please fill in the desciption at least in one language")
     end
     if title_es.empty? && title_eu.empty? && title_en.empty? && title_fr.empty?
-      errors.add(:des_es, "Please fill in the desciption at least in one language")
+      errors.add(:des_es, "Please fill in the title at least in one language")
     end
   end
   

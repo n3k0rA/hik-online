@@ -1,11 +1,6 @@
 %p#notice= notice
 
-%p
-  %b Id:
-  = @event.id
-%p
-  %b Title:
-  = @event.title
+
 %p
   %b Start date:
   = @event.start_date
@@ -22,9 +17,6 @@
   %b Price:
   = @event.price
 %p
-  %b Description:
-  = @event.description
-%p
   %b Email:
   = @event.email
 %p
@@ -34,14 +26,8 @@
   %b Phone:
   = @event.phone
 %p
-  %b Created at:
-  = @event.created_at
-%p
-  %b Updated at:
-  = @event.updated_at
-%p
   %b User:
-  = @event.user_id
+  = @event.user.name
 %p
   %b Address:
   = @event.address
@@ -58,9 +44,6 @@
   %b Des fr:
   = @event.des_fr
 %p
-  %b Views:
-  = @event.views
-%p
   %b Title es:
   = @event.title_es
 %p
@@ -72,18 +55,6 @@
 %p
   %b Title fr:
   = @event.title_fr
-%p
-  %b Approved:
-  = @event.approved
-%p
-  %b Reminded:
-  = @event.reminded
-%p
-  %b Cancelled:
-  = @event.cancelled
-%p
-  %b Cancel message:
-  = @event.cancel_message
 %p
   %b Province:
   = @event.province
