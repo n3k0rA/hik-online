@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116191055) do
+ActiveRecord::Schema.define(:version => 20130122184451) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(:version => 20130116191055) do
     t.datetime "finish_date"
     t.string   "place"
     t.string   "town"
-    t.decimal  "price"
+    t.integer  "price",            :default => 0
     t.string   "email"
     t.string   "website"
     t.string   "phone"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "user_id"
     t.string   "address"
     t.text     "des_es"
@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(:version => 20130116191055) do
     t.string   "title_eu"
     t.string   "title_en"
     t.string   "title_fr"
-    t.boolean  "approved"
+    t.boolean  "approved",         :default => false
     t.boolean  "reminded"
-    t.boolean  "cancelled"
+    t.boolean  "cancelled",        :default => false
     t.text     "cancel_message"
     t.string   "province"
     t.string   "tickets"
@@ -63,6 +63,13 @@ ActiveRecord::Schema.define(:version => 20130116191055) do
 
   add_index "events", ["slug"], :name => "index_events_on_slug"
 
+  create_table "events_users", :id => false, :force => true do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+  end
+
+  add_index "events_users", ["event_id", "user_id"], :name => "index_events_users_on_event_id_and_user_id"
+
   create_table "friendly_id_slugs", :force => true do |t|
     t.string   "slug",                         :null => false
     t.integer  "sluggable_id",                 :null => false
@@ -73,6 +80,17 @@ ActiveRecord::Schema.define(:version => 20130116191055) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
   add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "microposts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "content"
+    t.integer  "target_id"
+    t.integer  "event_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "microposts", ["user_id", "created_at"], :name => "index_microposts_on_user_id_and_created_at"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

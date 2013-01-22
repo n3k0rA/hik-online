@@ -9,13 +9,14 @@ class Event < ActiveRecord::Base
   
   belongs_to :user
   has_and_belongs_to_many :categories
+  has_and_belongs_to_many :users
   
-  validates_datetime :finish_date, :after => :start_date
-  validates_datetime :finish_date, :on_or_after => lambda { Date.current }
+  #validates_datetime :finish_date, :after => :start_date
+  #validates_datetime :finish_date, :on_or_after => lambda { Date.current }
   validates :town, presence: true
   validate :the_event_must_have_at_least_one_description
   validates :price, numericality: {greater_than_or_equal_to: 0}
-  scope :start_between, lambda{|from, to| where ["start_date BETWEEN ? and ?", from.to_date - 1, to.to_date + 1] }
+  #scope :start_between, lambda{|from, to| where ["start_date BETWEEN ? and ?", from.to_date - 1, to.to_date + 1] }
   
   
   #Paperclip
@@ -48,7 +49,7 @@ class Event < ActiveRecord::Base
   end
   
   protected
-  
+    #defines the url for the event instaed the ID
     def title_with_id
       if I18n.locale.to_s == "es" && !title_es.empty? 
         title_es

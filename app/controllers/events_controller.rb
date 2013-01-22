@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   
+  after_filter :create_micropost, :only => [:update]
+  
   # GET /events
   # GET /events.json
   def index
@@ -46,7 +48,6 @@ class EventsController < ApplicationController
   def create
     categories = params[:category_ids] or []
     @event = Event.new(params[:event].merge(:user_id => current_user.id, :category_ids => categories))
-    @event.views = 0
     check_date
 
     respond_to do |format|
@@ -65,9 +66,10 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
-
+    
     respond_to do |format|
       if @event.update_attributes(params[:event])
+        @content = "4"
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
@@ -76,19 +78,31 @@ class EventsController < ApplicationController
       end
     end
   end
+  
 
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
-    @event.categories .delete
-    @event.destroy
-
-    respond_to do |format|
-      format.html { redirect_to events_url }
-      format.json { head :no_content }
+    if (@event.users.empty? || !@event.approved)
+      @event.categories.delete
+      @event.destroy
+      respond_to do |format|
+        format.html { redirect_to events_url }
+        format.json { head :no_content }
+      end
+    else
+      @event.cancelled = true
+      @event.approved = false
+      @event.save
+      redirect_to cancel_event_path(:id=>@event.id)
     end
   end
+  
+  def cancel
+    @event = Event.find(params[:id])
+  end
+  
   
 private 
 

@@ -26,6 +26,17 @@ class ApplicationController < ActionController::Base
     def extract_locale_from_accept_language_header
       request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
     end
-  
+    
+    def create_micropost
+      if @content
+        @micropost = Micropost.new(:user_id => current_user.id, :content => @content)
+        if @event
+          @micropost.event_id = @event.id
+        else
+          @micropost.target_id = @user.id
+        end
+        @micropost.save
+      end
+    end
     
 end

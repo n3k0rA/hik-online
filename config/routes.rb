@@ -12,6 +12,12 @@ Hikultura::Application.routes.draw do
     resources :users
     resources :categories
     
+    
+    get "remind_me" => "reminders#create"
+    get "not_remind_me" => "reminders#destroy"
+    
+    get "cancel_event" => "events#cancel"
+    
   end
   
   # Root path

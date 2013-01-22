@@ -1,6 +1,8 @@
-%p#notice= notice
 
 
+%p
+  %b ID:
+  = @event.id
 %p
   %b Start date:
   = @event.start_date
@@ -80,3 +82,22 @@
 = link_to 'Edit', edit_event_path(@event)
 \|
 = link_to 'Back', events_path
+
+#event_reminder
+  %div
+    -if @event.finish_date > Time.now
+      -if @event.cancelled?
+        %h2.capital{:style=>"color:red;"} This event has been cancelled
+      -else
+        -if (current_user && current_user.events.include?(@event))
+          %h4  
+            -if ((@event.start_date-Time.now)< 259146.01469397545)
+              =t :reminder_soon
+            -else
+              = t :already_following_event
+          =link_to 'Stop the reminder', not_remind_me_path(:id => @event.id)
+        -else
+          =link_to 'remind_me', remind_me_path(:id => @event.id)   
+
+          
+        
