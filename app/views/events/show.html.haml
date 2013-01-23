@@ -98,6 +98,8 @@
           =link_to 'Stop the reminder', not_remind_me_path(:id => @event.id)
         -else
           =link_to 'remind_me', remind_me_path(:id => @event.id)   
-
-          
-        
+#new_comment
+  = render :partial => 'comments/new'
+ 
+#all_comments
+  = render :partial => 'comments/comment_index', :collection => @event.comments.order('created_at DESC'), :as => 'comment'

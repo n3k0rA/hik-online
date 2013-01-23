@@ -18,4 +18,6 @@
 //= require town_autocomplete
 //= require tabs_language
 //= require datetime_format
+//= require create
+
 

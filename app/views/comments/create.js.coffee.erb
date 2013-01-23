@@ -1,0 +1,6 @@
+$('<%= escape_javascript(render(:partial => 'comments/comment_index', :collection => @event.comments.order('created_at DESC'), :as => 'comment'))%>')
+  .appendTo('#comments')
+  .hide()
+  .fadeIn()
+
+$('#new_comment')[0].reset()

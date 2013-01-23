@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :users
+  has_many :comments, :dependent => :destroy
   
   #validates_datetime :finish_date, :after => :start_date
   #validates_datetime :finish_date, :on_or_after => lambda { Date.current }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122184451) do
+ActiveRecord::Schema.define(:version => 20130123160224) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(:version => 20130122184451) do
   end
 
   add_index "categories_events", ["category_id", "event_id"], :name => "index_categories_events_on_category_id_and_event_id", :unique => true
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.text     "body"
+    t.boolean  "banned"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "comments", ["event_id"], :name => "index_comments_on_event_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "events", :force => true do |t|
     t.datetime "start_date"

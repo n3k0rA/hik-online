@@ -11,12 +11,17 @@ Hikultura::Application.routes.draw do
     resources :events
     resources :users
     resources :categories
+    resources :comments
     
-    
+    #reminders
     get "remind_me" => "reminders#create"
     get "not_remind_me" => "reminders#destroy"
     
+    #events
     get "cancel_event" => "events#cancel"
+    
+    #comments
+    get "report_spam" => "comments#report_spam"
     
   end
   

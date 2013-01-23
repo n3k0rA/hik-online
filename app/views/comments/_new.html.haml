@@ -1,0 +1,14 @@
+
+#new_comment_form
+  = form_for @comment do|f|
+    = f.hidden_field :event_id
+    %p
+      %h3
+        = f.label t :do_comment
+      %br/
+      = f.text_area(:body, :class=>"comment_box")
+    %p
+      = f.submit t :submit_comment
+#new_comment_user_photo
+  -if current_user
+    =image_tag(current_user.avatar.url(:thumb))

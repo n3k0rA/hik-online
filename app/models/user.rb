@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :created_events, :class_name => "Event", :foreign_key => "user_id"
   has_many :micropsots, :dependent => :destroy
   has_and_belongs_to_many :events
+  has_many :comments, :dependent => :destroy
   
   
   #Paperclip
