@@ -1,25 +1,30 @@
 class CommentsController < ApplicationController
   
-  respond_to :html, :js
   
-  after_filter :create_micropost, :only => [:create]
+  
+  #after_filter :create_micropost, :only => [:create]
   after_filter :deletable_comment, :only=>[:destroy]
   before_filter :authenticate_user!, except: [:report_spam]
   
-  
+
   
   def create
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.create(params[:comment])
     @comment.user = current_user
-    @event = @comment.event
     @comment.save
-
-
-
-    respond_with @comment, :location => @comment.event
-    
-    
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @comment.event }
+        format.js
+      else
+        format.html { redirect_to  @comment.event, notice: "Comment body cannot be blank" }
+        format.json { render json: @comment.event.errors, status: :unprocessable_entity }
+      end
+    end
   end
+  
+  
+  
   
   def destroy
     @comment = Comment.find(params[:id])

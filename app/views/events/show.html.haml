@@ -98,8 +98,32 @@
           =link_to 'Stop the reminder', not_remind_me_path(:id => @event.id)
         -else
           =link_to 'remind_me', remind_me_path(:id => @event.id)   
-#new_comment
-  = render :partial => 'comments/new'
- 
-#all_comments
-  = render :partial => 'comments/comment_index', :collection => @event.comments.order('created_at DESC'), :as => 'comment'
+          
+#tabs
+  %ul
+    %li
+      =link_to I18n.t("comment", :count=> @event.comments.count), '#tabs-1', :id=>'comments_count'
+    %li
+      =link_to I18n.t("interested", :count=> @event.users.count), '#tabs-2'
+    %li
+      =link_to "Event Info", '#tabs-3'
+    %li
+      =link_to "Map", '#tabs-4'
+  #tabs-1
+    #new_comment_box
+      #new_comment_form
+        = form_for @comment, :remote => true do |f|
+          = f.hidden_field :event_id
+          %p
+            %h3
+              = f.label t :do_comment
+            %br/
+            = f.text_area(:body, :class=>"comment_box")
+          %p
+            = f.submit t :submit_comment
+      #new_comment_user_photo
+        -if current_user
+          =image_tag(current_user.avatar.url(:thumb))
+    #comment-notice 
+    #comments
+      = render :partial => @event.comments.order('created_at DESC'), :locals => { :list => true }
