@@ -44,7 +44,7 @@
                       = link_to I18n.t(:sign_up), new_user_registration_path
                     .log
                       = link_to I18n.t(:log_in), new_user_session_path
-                    = link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in" 
+                    = link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in_fb" 
                 #lang
                   - [:es, :eu, :fr, :en].each do |locale|
                     %li= link_to locale, url_for(locale: locale)
