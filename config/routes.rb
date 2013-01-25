@@ -13,8 +13,10 @@ Hikultura::Application.routes.draw do
     resources :users
     resources :categories
     resources :comments
+    resources :translations
     
-    #sessions
+    #translations
+    get "commit_translation" => "translations#commit"
     
     #reminders
     get "remind_me" => "reminders#create"

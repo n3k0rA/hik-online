@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :users
   has_many :comments, :dependent => :destroy
+  has_many :translations, :dependent => :destroy
   
   #validates_datetime :finish_date, :after => :start_date
   #validates_datetime :finish_date, :on_or_after => lambda { Date.current }
@@ -37,7 +38,7 @@ class Event < ActiveRecord::Base
             
   #Sets the values for the Province select field
   PROVINCES = ["alaba", "biscay", "guipuzkoa", "navarre", "labourd", "b_navarre", "soule"]
-            
+           
             
   #validates the presence of at least one title and description
   def the_event_must_have_at_least_one_description

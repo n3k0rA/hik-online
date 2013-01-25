@@ -18,7 +18,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    @event.views = @event.views + 1
+    #@event.views = @event.views + 1
     @event.save
     @comment = Comment.new(:event => @event)
     respond_to do |format|
@@ -48,7 +48,7 @@ class EventsController < ApplicationController
   def create
     categories = params[:category_ids] or []
     @event = Event.new(params[:event].merge(:user_id => current_user.id, :category_ids => categories))
-    check_date
+    
 
     respond_to do |format|
       if @event.save
@@ -107,18 +107,14 @@ class EventsController < ApplicationController
 private 
 
   # Set the event to 'reminded'
-  def check_date
-    if close_date
-      @event.reminded = true
+  def check_date(event)
+    if close_date(event)
+      event.reminded = true
     end
   end
   
   # Checks whether an event is happening in less than 72h
-  def close_date
-    if ((@event.start_date-Time.now)< 259146.01469397545)
-      true
-    else 
-      false
-    end
+  def close_date(event)
+    ((event.start_date-Time.now)< 259146.01469397545)
   end
 end

@@ -1,6 +1,8 @@
 class RemindersController < ApplicationController
   
   after_filter :create_micropost, :only => [:create]
+  
+  
   def create
     @event = Event.find(params[:id])
     if current_user
