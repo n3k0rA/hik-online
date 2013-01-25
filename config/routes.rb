@@ -1,6 +1,7 @@
 Hikultura::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
-    :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
+    :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
+                      :registrations => "registrations" }
 
   
 
@@ -12,6 +13,8 @@ Hikultura::Application.routes.draw do
     resources :users
     resources :categories
     resources :comments
+    
+    #sessions
     
     #reminders
     get "remind_me" => "reminders#create"

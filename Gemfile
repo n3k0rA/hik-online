@@ -40,6 +40,7 @@ gem "aws-s3"
 gem "aws-sdk"
 gem 'validates_timeliness'
 gem 'friendly_id'
+gem "switch_user"
 
 
 # To use ActiveModel has_secure_password

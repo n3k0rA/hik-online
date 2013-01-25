@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  after_filter :store_location
   before_filter :set_locale
   
   def set_locale
@@ -20,6 +21,15 @@ class ApplicationController < ActionController::Base
     { :locale => I18n.locale }
   end
   
+  #These 2 methods keep track to the user last page to redirect properly after sign in & log in
+  def store_location
+    # store last url as long as it isn't a /users path
+    session[:previous_url] = request.fullpath unless request.fullpath =~ /\/users/
+  end
+
+  def after_sign_in_path_for(resource)
+    session[:previous_url] || root_path
+  end
   
   
   private
@@ -32,7 +42,10 @@ class ApplicationController < ActionController::Base
     def create_micropost
       if @content
         @micropost = Micropost.new(:user_id => current_user.id, :content => @content)
-        if @event
+        if @comment
+          @micropost.comment_id = @comment.id
+          @micropost.event_id = @event.id
+        elsif @event
           @micropost.event_id = @event.id
         else
           @micropost.target_id = @user.id

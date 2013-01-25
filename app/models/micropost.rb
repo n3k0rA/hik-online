@@ -2,6 +2,7 @@ class Micropost < ActiveRecord::Base
   attr_accessible :content, :event_id, :target_id, :user_id
   
   belongs_to :user
+  belongs_to :comment
   
   # Content ID
   # 1 = U place a comment in E

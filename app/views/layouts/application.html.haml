@@ -12,7 +12,7 @@
     
     = javascript_include_tag "application"
     = csrf_meta_tags
-
+    = switch_user_select
     -if I18n.locale.to_s == "es"
       =javascript_include_tag "datepicker/ui.datepicker-es"
     -elsif I18n.locale.to_s == "eu"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130123160224) do
+ActiveRecord::Schema.define(:version => 20130125144444) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -95,9 +95,10 @@ ActiveRecord::Schema.define(:version => 20130123160224) do
 
   create_table "microposts", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "event_id"
+    t.integer  "comment_id"
     t.integer  "content"
     t.integer  "target_id"
-    t.integer  "event_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

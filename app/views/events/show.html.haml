@@ -110,20 +110,25 @@
     %li
       =link_to "Map", '#tabs-4'
   #tabs-1
-    #new_comment_box
-      #new_comment_form
-        = form_for @comment, :remote => true do |f|
-          = f.hidden_field :event_id
-          %p
-            %h3
-              = f.label t :do_comment
-            %br/
-            = f.text_area(:body, :class=>"comment_box")
-          %p
-            = f.submit t :submit_comment
-      #new_comment_user_photo
-        -if current_user
-          =image_tag(current_user.avatar.url(:thumb))
+    -if current_user
+      #new_comment_box
+        #new_comment_form
+          = form_for @comment, :remote => true do |f|
+            = f.hidden_field :event_id
+            %p
+              %h3
+                = f.label t :do_comment
+              %br/
+              = f.text_area(:body, :class=>"comment_box")
+            %p
+              = f.submit t :submit_comment
+        #new_comment_user_photo
+          -if current_user
+            =image_tag(current_user.avatar.url(:thumb))
+    -else
+      %p
+        %b Debes darte de alta en el sistema para poder comentar
+        =render 'devise/sessions/new'
     #comment-notice 
     #comments
       = render :partial => @event.comments.order('created_at DESC'), :locals => { :list => true }

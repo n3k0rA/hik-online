@@ -2,8 +2,8 @@ class CommentsController < ApplicationController
   
   
   
-  #after_filter :create_micropost, :only => [:create]
-  after_filter :deletable_comment, :only=>[:destroy]
+  after_filter :create_micropost, :only => [:create]
+  before_filter :deletable_comment, :only=>[:destroy]
   before_filter :authenticate_user!, except: [:report_spam]
   
 
@@ -12,8 +12,11 @@ class CommentsController < ApplicationController
     @comment = Comment.create(params[:comment])
     @comment.user = current_user
     @comment.save
+    @event = @comment.event
+    
     respond_to do |format|
       if @comment.save
+        @content = "1"
         format.html { redirect_to @comment.event }
         format.js
       else
@@ -28,10 +31,11 @@ class CommentsController < ApplicationController
   
   def destroy
     @comment = Comment.find(params[:id])
+    @event = @comment.event
     @comment.destroy
     
     respond_to do |format|
-      format.html {redirect_to @comment.event}
+      format.html {redirect_to @event}
       format.json {head :ok}
     end
   end
