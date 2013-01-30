@@ -46,10 +46,13 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    
+    params[:event][:start_date] = params[:event][:start_date].present? ? DateTime.parse(params[:event][:start_date]) : nil
+    params[:event][:finish_date] = params[:event][:finish_date].present? ? DateTime.parse(params[:event][:finish_date]) : nil
+
     categories = params[:category_ids] or []
     @event = Event.new(params[:event].merge(:user_id => current_user.id, :category_ids => categories))
     
-
     respond_to do |format|
       if @event.save
         #Mailer to seek appoval

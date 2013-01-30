@@ -10,10 +10,13 @@ Hikultura::Application.routes.draw do
 
   scope "(:locale)", :locale => /es|eu|fr|en/ do
     resources :events
-    resources :users
+    resources :users do
+      resources :follows
+    end
     resources :categories
     resources :comments
     resources :translations
+    
     
     #translations
     get "commit_translation" => "translations#commit"

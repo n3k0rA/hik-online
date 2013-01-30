@@ -1,6 +1,30 @@
 
+%p
 =@user.name
+%p
 =@user.email
+
+%p
+  -if user_signed_in?
+    #follow_user
+      =render :partial => "follows/follow_user", :locals => {:user => @user}
+  -else
+    You must log in to follow someone!
+
+
+%p
+#follower
+  Follows:
+  - for fol in @user.all_following
+    =fol.name
+    
+%p
+#followable
+  Followed by:
+  - for fol in @user.followers
+    =fol.name
+
+%p
 thumb
 = image_tag @user.avatar.url(:thumb)
 medieum

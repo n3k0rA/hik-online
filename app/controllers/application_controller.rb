@@ -42,16 +42,28 @@ class ApplicationController < ActionController::Base
     def create_micropost
       if @content
         @micropost = Micropost.new(:user_id => current_user.id, :content => @content)
-        if @comment
+        if @comment #in case of comment
           @micropost.comment_id = @comment.id
           @micropost.event_id = @event.id
-        elsif @event
+        elsif @event #in case of event created/updated or user follows an event
           @micropost.event_id = @event.id
-        else
+          if @user #in case of translation commited
+            @micropost.user_id = @user.id
+          end
+        elsif @follow
+          @micropost.follow_id = @follow.id
+        else #in case of...
           @micropost.target_id = @user.id
         end
         @micropost.save
       end
+    end
+    
+    def delete_follow_micropost
+      @mp = Micropost.where(:target_id => @user.id)
+      @mp = @mp.where(:content => 2)
+      @mp = @mp.where(:user_id => current_user.id)
+      @mp.first.destroy
     end
     
 end

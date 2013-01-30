@@ -28,8 +28,14 @@
   %b Phone:
   = @event.phone
 %p
-  %b User:
+  %b Creator:
   = @event.user.name
+%p
+  -if @event.translations.any?
+    %b Translators:
+    - @event.translations.each do |trans|
+      -if trans.committed
+        =link_to trans.user.name, trans.user
 %p
   %b Address:
   = @event.address
@@ -98,6 +104,15 @@
           =link_to 'Stop the reminder', not_remind_me_path(:id => @event.id)
         -else
           =link_to 'remind_me', remind_me_path(:id => @event.id)   
+      #available_lang
+        -if !@event.des_es.empty?
+          es
+        -if !@event.des_en.empty?
+          en
+        -if !@event.des_eu.empty?
+          eu
+        -if !@event.des_fr.empty?
+          fr
       -if I18n.locale.to_s =="es"
         .sp_translate
           =link_to I18n.t('add_translation'), new_translation_path(:id => @event.id)

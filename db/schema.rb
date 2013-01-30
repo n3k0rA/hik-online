@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125174212) do
+ActiveRecord::Schema.define(:version => 20130130181225) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -82,6 +82,19 @@ ActiveRecord::Schema.define(:version => 20130125174212) do
 
   add_index "events_users", ["event_id", "user_id"], :name => "index_events_users_on_event_id_and_user_id"
 
+  create_table "follows", :force => true do |t|
+    t.integer  "followable_id",                      :null => false
+    t.string   "followable_type",                    :null => false
+    t.integer  "follower_id",                        :null => false
+    t.string   "follower_type",                      :null => false
+    t.boolean  "blocked",         :default => false, :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "follows", ["followable_id", "followable_type"], :name => "fk_followables"
+  add_index "follows", ["follower_id", "follower_type"], :name => "fk_follows"
+
   create_table "friendly_id_slugs", :force => true do |t|
     t.string   "slug",                         :null => false
     t.integer  "sluggable_id",                 :null => false
@@ -93,17 +106,8 @@ ActiveRecord::Schema.define(:version => 20130125174212) do
   add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
-  create_table "microposts", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.integer  "comment_id"
-    t.integer  "content"
-    t.integer  "target_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "microposts", ["user_id", "created_at"], :name => "index_microposts_on_user_id_and_created_at"
+# Could not dump table "microposts" because of following StandardError
+#   Unknown type 'reference' for column 'follow_id'
 
   create_table "translations", :force => true do |t|
     t.integer  "user_id"
@@ -117,8 +121,9 @@ ActiveRecord::Schema.define(:version => 20130125174212) do
     t.string   "title_eu"
     t.string   "title_fr"
     t.string   "title_en"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "committed",  :default => false
   end
 
   create_table "users", :force => true do |t|
@@ -155,6 +160,8 @@ ActiveRecord::Schema.define(:version => 20130125174212) do
     t.string   "website"
     t.boolean  "admin",                  :default => false
     t.string   "slug"
+    t.integer  "created",                :default => 0
+    t.integer  "translated",             :default => 0
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

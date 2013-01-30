@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
   
+  #Follow Model
+  acts_as_follower
+  acts_as_followable
+  
   # Devise
   devise :database_authenticatable, :registerable, :lockable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
@@ -11,7 +15,7 @@ class User < ActiveRecord::Base
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :current_password, :email, :password, :password_confirmation, :remember_me, :provider, 
-    :uid, :name, :gender, :town, :avatar
+    :uid, :name, :gender, :town, :avatar, :translated, :created
   
   has_many :created_events, :class_name => "Event", :foreign_key => "user_id"
   has_many :micropsots, :dependent => :destroy

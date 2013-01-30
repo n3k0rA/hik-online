@@ -20,7 +20,7 @@
 
 
 #tabs 
-  -if I18n.locale.to_s=="en" && !@translation.des_en.empty?
+  -if I18n.locale.to_s=="en" && !@translation.des_en.nil?
     %ul
       %li
         =link_to I18n.t(:lang_english), '#tabs-4'
@@ -30,7 +30,7 @@
         =link_to I18n.t(:lang_basque), '#tabs-2'
       %li
         =link_to I18n.t(:lang_french), '#tabs-3'
-  -elsif I18n.locale.to_s=="eu" && !@translation.des_eu.empty?
+  -elsif I18n.locale.to_s=="eu" && !@translation.des_eu.nil?
     %ul
       %li
         =link_to I18n.t(:lang_basque), '#tabs-2'
@@ -40,7 +40,7 @@
         =link_to I18n.t(:lang_french), '#tabs-3'
       %li
         =link_to I18n.t(:lang_english), '#tabs-4'
-  -elsif I18n.locale.to_s=="fr" && !@translation.des_fr.empty?
+  -elsif I18n.locale.to_s=="fr" && !@translation.des_fr.nil?
     %ul
       %li
         =link_to I18n.t(:lang_french), '#tabs-3'
@@ -50,7 +50,7 @@
         =link_to I18n.t(:lang_spanish), '#tabs-1'
       %li
         =link_to I18n.t(:lang_english), '#tabs-4'
-  -elsif !@translation.des_es.empty?
+  -elsif !@translation.des_es.nil?
     %ul
       %li
         =link_to I18n.t(:lang_spanish), '#tabs-1'
@@ -156,6 +156,9 @@
           %i "no translation so far"
       -else
         =simple_format(@translation.event.des_en)
+Remember that after accepting the translation you can always edit the info in your account section.
 %p  
   %button.black_font
     =link_to "Accept", commit_translation_path(:id=>@translation.id)
+  %button.black_font
+    =link_to "Delete", @translation, method: :delete

@@ -1,6 +1,7 @@
 class TranslationsController < ApplicationController
   
   before_filter :authenticate_user!
+  after_filter :create_micropost, :only => [:commit]
   
   def new
     @event = Event.find(params[:id])
@@ -29,10 +30,44 @@ class TranslationsController < ApplicationController
     end
   end
   
-  
+  # Commit an uploaded translation to the original event
   def commit
-    
+    @translation = Translation.find(params[:id])
+    @event = @translation.event
+    if !@translation.des_es.nil? && @event.des_es.empty?
+      @event.title_es = @translation.title_es
+      @event.des_es = @translation.des_es
+    end
+    if !@translation.des_eu.nil? && @event.des_eu.empty?
+      @event.title_eu = @translation.title_eu
+      @event.des_eu = @translation.des_eu
+    end
+    if !@translation.des_fr.nil? && @event.des_fr.empty?
+      @event.title_fr = @translation.title_fr
+      @event.des_fr = @translation.des_fr
+    end
+    if !@translation.des_en.nil? && @event.des_en.empty?
+      @event.title_en = @translation.title_en
+      @event.des_en = @translation.des_en
+    end
+    @event.save
+    @user= @translation.user
+    @content = "5"
+    @translation.committed = true
+    @translation.user.translated += 1 
+     @translation.user.save
+    @translation.save
+    redirect_to @event
   end
   
+  # Deletes an exiting translation
+  def destroy
+    @translation = Translation.find(params[:id])
+    @translation.destroy
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.json { head :ok }
+    end
+  end
   
 end
