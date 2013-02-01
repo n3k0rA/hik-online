@@ -19,6 +19,7 @@
 //= require tabs_language
 //= require datetime_format
 //= require temp
+//= require_folder datepicker
 
 
 
