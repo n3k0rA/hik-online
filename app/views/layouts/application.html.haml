@@ -13,12 +13,14 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     = switch_user_select
-    -if I18n.locale.to_s == "es"
-      =javascript_include_tag "datepicker/ui.datepicker-es"
-    -elsif I18n.locale.to_s == "eu"
-      =javascript_include_tag "datepicker/ui.datepicker-eu"
-    -elsif I18n.locale.to_s == "fr"
-      =javascript_include_tag "datepicker/ui.datepicker-fr"
+    
+    -if Rails.env == 'development'
+      -if I18n.locale.to_s == "es"
+        =javascript_include_tag "datepicker/ui.datepicker-es"
+      -elsif I18n.locale.to_s == "eu"
+        =javascript_include_tag "datepicker/ui.datepicker-eu"
+      -elsif I18n.locale.to_s == "fr"
+        =javascript_include_tag "datepicker/ui.datepicker-fr"
     
     %body{:class => "#{controller.controller_name} container"}
       .container
@@ -52,4 +54,5 @@
        
     %p.notice= notice
     %p.alert= alert
+    d------------------////////////////////-------------
     = yield

@@ -42,6 +42,10 @@ gem 'validates_timeliness'
 gem 'friendly_id'
 gem "switch_user"
 gem "acts_as_follower"
+gem 'hirb'
+gem 'mailboxer'
+gem 'kaminari'
+gem 'simple_form'
 
 
 # To use ActiveModel has_secure_password

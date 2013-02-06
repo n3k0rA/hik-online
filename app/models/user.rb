@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: [:slugged, :history]
   
+  # Mailboxer
+  acts_as_messageable
+  
   #Follow Model
   acts_as_follower
   acts_as_followable
@@ -22,6 +25,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :events
   has_many :comments, :dependent => :destroy
   has_many :translations
+  
   
   
   #Paperclip
@@ -68,6 +72,21 @@ class User < ActiveRecord::Base
     end
   end
   
+  
+  #Used by mailbox gem
+  def display_name
+    return name
+  end
+  
+  #Returning the email address of the model if an email should be sent for this object (Message or Notification).
+  #If no mail has to be sent, return nil.
+  def mailboxer_email(object)
+    #Check if an email should be sent for that object
+    #if true
+    return email
+    #if false
+    #return nil
+  end
   
   
   

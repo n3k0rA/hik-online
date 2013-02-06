@@ -3,6 +3,8 @@
 =@user.name
 %p
 =@user.email
+%p
+=@user.id
 
 %p
   -if user_signed_in?
@@ -23,8 +25,20 @@
   Followed by:
   - for fol in @user.followers
     =fol.name
+%p
+Messages:
 
 %p
+=link_to 'Conversations', user_conversations_path(@user)
+
+%p
+
+%p
+
+-if current_user == @user
+  =link_to 'Inbox', user_messages_path(@user)
+  
+%p  
 thumb
 = image_tag @user.avatar.url(:thumb)
 medieum

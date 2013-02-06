@@ -1,4 +1,6 @@
 Hikultura::Application.routes.draw do
+
+
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
     :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                       :registrations => "registrations" }
@@ -12,10 +14,17 @@ Hikultura::Application.routes.draw do
     resources :events
     resources :users do
       resources :follows
+      resources :messages
+      resources :conversations do
+        member do
+          post :reply
+        end
+      end
     end
     resources :categories
     resources :comments
     resources :translations
+    
     
     
     #translations

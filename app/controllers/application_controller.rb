@@ -65,5 +65,6 @@ class ApplicationController < ActionController::Base
       @mp = @mp.where(:user_id => current_user.id)
       @mp.first.destroy
     end
+
     
 end

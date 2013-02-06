@@ -103,7 +103,7 @@
               = t :already_following_event
           =link_to 'Stop the reminder', not_remind_me_path(:id => @event.id)
         -else
-          =link_to 'remind_me', remind_me_path(:id => @event.id)   
+          =link_to 'remind_me', remind_me_path(:id => @event.id)  
       #available_lang
         -if !@event.des_es.empty?
           es

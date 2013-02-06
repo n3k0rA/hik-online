@@ -3,6 +3,7 @@
 %table
   %tr
     %th Id
+    %th Created by
     %th Title
     %th Start date
     %th Finish date
@@ -38,6 +39,8 @@
 
   - @events.each do |event|
     %tr
+      %td= event.id
+      %td= link_to event.user.name, event.user
       %td= event.start_date
       %td= event.finish_date
       %td= event.place

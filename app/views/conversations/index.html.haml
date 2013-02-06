@@ -1,0 +1,10 @@
+%h2
+  Conversations
+  
+#conver_index  
+  - @conversations.each do |c|
+    %p
+      = link_to c.subject, user_conversation_path(:id=>c.id), :remote => true
+
+#conver_show
+  =render :partial => 'show'
