@@ -14,13 +14,11 @@
     = csrf_meta_tags
     = switch_user_select
     
-    -if Rails.env == 'development'
-      -if I18n.locale.to_s == "es"
-        =javascript_include_tag "datepicker/ui.datepicker-es"
-      -elsif I18n.locale.to_s == "eu"
-        =javascript_include_tag "datepicker/ui.datepicker-eu"
-      -elsif I18n.locale.to_s == "fr"
-        =javascript_include_tag "datepicker/ui.datepicker-fr"
+
+
+
+    
+    
     
     %body{:class => "#{controller.controller_name} container"}
       .container
@@ -46,6 +44,8 @@
                       = link_to I18n.t(:sign_up), new_user_registration_path
                     .log
                       = link_to I18n.t(:log_in), new_user_session_path
+                    .log
+                      = link_to "LoginJS", new_user_session_path, :id=>"login_js", :remote => true
                     = link_to "Log in with Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in_fb" 
                 #lang
                   - [:es, :eu, :fr, :en].each do |locale|

@@ -7,6 +7,7 @@ gem 'rails', '3.2.11'
 
 group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
+
 end
 
 group :production do
@@ -46,6 +47,9 @@ gem 'hirb'
 gem 'mailboxer'
 gem 'kaminari'
 gem 'simple_form'
+
+
+
 
 
 # To use ActiveModel has_secure_password

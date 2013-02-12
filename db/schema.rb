@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130205180208) do
+ActiveRecord::Schema.define(:version => 20130208134552) do
+
+  create_table "alarms", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.boolean  "active",     :default => true
+    t.string   "keyword"
+    t.string   "where"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  create_table "alarms_categories", :id => false, :force => true do |t|
+    t.integer "alarm_id"
+    t.integer "category_id"
+  end
+
+  add_index "alarms_categories", ["alarm_id"], :name => "index_alarms_categories_on_alarm_id"
 
   create_table "categories", :force => true do |t|
     t.string   "name"

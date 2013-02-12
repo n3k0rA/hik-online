@@ -4,8 +4,9 @@ class ConversationsController < ApplicationController
   before_filter :conversation , :except => [:index]
   
   def index
-    @conversation = Conversation.last
-     @receipts = current_user.mailbox.receipts_for(@conversation).not_trash
+    @conversation = current_user.mailbox.inbox.last
+    @conversations = current_user.mailbox.conversations
+    @receipts = current_user.mailbox.receipts_for(@conversation).not_trash
     @conversation.participants.each do |p|
       if p.id != current_user.id
         @receiver = p
@@ -13,7 +14,7 @@ class ConversationsController < ApplicationController
     end
     
     
-    @conversations = current_user.mailbox.conversations
+    
   end
   
   def show
@@ -28,19 +29,13 @@ class ConversationsController < ApplicationController
   end
   
   def reply
-    #text = params[:body].to_s
-    #raise foo
     current_user.reply_to_conversation(@conversation, params[:message] [:body])
     redirect_to user_conversation_path(@conversation.id)
   end
     
   
   def update
-    #last_receipt = current_user.mailbox.receipts_for(params[:conversation_id]).last
-    #raise foo
-    #raise params[:name]
     @conversation = Conversation.find(params[:id])
-   # raise @conversation
     @user = User.find(7)
     @receipt =@user.reply_to_conversation(@conversation, params[:body])
     
@@ -48,6 +43,11 @@ class ConversationsController < ApplicationController
     @receipt.mark_as_read
   end
   
+  def destroy
+    @conversation.move_to_trash(current_user)
+  end
+
+      
   
   private
   

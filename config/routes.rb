@@ -13,6 +13,11 @@ Hikultura::Application.routes.draw do
   scope "(:locale)", :locale => /es|eu|fr|en/ do
     resources :events
     resources :users do
+      resources :alarms do
+        member do
+          get :switch
+        end
+      end
       resources :follows
       resources :messages
       resources :conversations do
@@ -26,6 +31,8 @@ Hikultura::Application.routes.draw do
     resources :translations
     
     
+    #Conversations search
+    post 'search' => 'conversations#search'
     
     #translations
     get "commit_translation" => "translations#commit"
