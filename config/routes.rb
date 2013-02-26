@@ -1,6 +1,14 @@
 Hikultura::Application.routes.draw do
 
 
+  
+
+
+
+
+
+  get "home/index"
+
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
     :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                       :registrations => "registrations" }
@@ -29,7 +37,17 @@ Hikultura::Application.routes.draw do
     resources :categories
     resources :comments
     resources :translations
+    resources :sponsors
+    resources :entries
+    resources :reports
     
+    #resources :news
+    
+    #Static content
+    get "about", to: "static#about"
+    get "privacy", to: "static#privacy"
+    get "faq", to: "static#faq"
+    get "contact", to: "static#contact"
     
     #Conversations search
     post 'search' => 'conversations#search'
@@ -43,6 +61,7 @@ Hikultura::Application.routes.draw do
     
     #events
     get "cancel_event" => "events#cancel"
+    get "resubmit_event" => "events#resubmit"
     
     #comments
     get "report_spam" => "comments#report_spam"
@@ -54,7 +73,7 @@ Hikultura::Application.routes.draw do
   match '/?locale=eu' => 'events#index'
   match '/?locale=fr' => 'events#index'
   match '/?locale=en' => 'events#index'
-  root :to => 'events#index'
+  root :to => 'home#index'
   
   
   # The priority is based upon order of creation:

@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
   def report_spam
     @comment = Comment.find(params[:id])
     #AdminMailer..... notfy the admin with comment.id and user.id if !nil?
-    flash[:notice] = "The comment has been notify to the admins. Thanks for your"
+    flash[:notice] = "The comment has been notify to the admins. Thanks for your help to improve!"
     redirect_to @comment.event
   end
   

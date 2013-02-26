@@ -1,0 +1,33 @@
+- title "Sponsors"
+%table
+  %tr
+    %th Title Es
+    %th Title Eu
+    %th Title Fr
+    %th Title En
+    %th Body Es
+    %th Body Eu
+    %th Body Fr
+    %th Body En
+    %th Es
+    %th Eu
+    %th Fr
+    %th En
+  - for sponsor in @sponsors
+    %tr
+      %td= sponsor.title_es
+      %td= sponsor.title_eu
+      %td= sponsor.title_fr
+      %td= sponsor.title_en
+      %td= sponsor.body_es
+      %td= sponsor.body_eu
+      %td= sponsor.body_fr
+      %td= sponsor.body_en
+      %td= sponsor.es
+      %td= sponsor.eu
+      %td= sponsor.fr
+      %td= sponsor.en
+      %td= link_to "Show", sponsor
+      %td= link_to "Edit", edit_sponsor_path(sponsor)
+      %td= link_to "Destroy", sponsor, :confirm => 'Are you sure?', :method => :delete
+%p= link_to "New Sponsor", new_sponsor_path

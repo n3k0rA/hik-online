@@ -1,0 +1,28 @@
+%h2 
+  =t :home_title
+%p 
+  =t :home_desc
+%p
+%b
+  = @events.count
+  Destacados
+  #coin-slider
+    %a{:href => "google.com", :target => "_blank"}
+      = image_tag("hikultura_paisvasco_euskadi_jaia_cultura_small.png", :alt => "HiKultura Logo HiKultura.com")
+      %span
+        Hikultura goddes!
+      
+    %a{:href => "not.not", :target => "_blank"}
+      = image_tag("euskal_herria_cultura_culture.gif", :alt => "El mundo a  mis pies")
+      %span
+        La salsa del merengue
+        
+       
+%p  
+%b 
+  Last new on the blog
+  =@entries.count
+- for ent in @entries
+  %p
+    = link_to truncate(ent.title_es, :length =>20), entry_path(:id => ent.id)
+= link_to 'More News', entries_path

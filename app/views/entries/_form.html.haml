@@ -1,0 +1,107 @@
+= form_for @entry do |f|
+  - if @entry.errors.any?
+    = f.errors.full.messages.each do |msg|
+      %p
+        =   msg
+  #tabs
+    -if I18n.locale.to_s=="en" 
+      %ul
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+    -elsif I18n.locale.to_s=="eu" 
+      %ul
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+    -elsif I18n.locale.to_s=="fr" 
+      %ul
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+    -else
+      %ul
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+    #tabs-1
+      %p
+        = f.label :title_es
+        %br/
+        = f.text_field :title_es
+      %p
+        = f.label :body_es
+        %br/
+        = f.text_area :body_es
+    #tabs-2
+      %p
+        = f.label :title_eu
+        %br/
+        = f.text_field :title_eu
+      %p
+        = f.label :body_eu
+        %br/
+        = f.text_area :body_eu
+    #tabs-3
+      %p
+        = f.label :title_fr
+        %br/
+        = f.text_field :title_fr
+      %p
+        = f.label :body_fr
+        %br/
+        = f.text_area :body_fr
+    #tabs-4
+      %p
+        = f.label :title_en
+        %br/
+        = f.text_field :title_en
+      %p
+        = f.label :body_en
+        %br/
+        = f.text_area :body_en
+  
+
+  
+  %p
+    = f.label :es
+    %br/
+    = f.check_box :es
+  %p
+    = f.label :eu
+    %br/
+    = f.check_box :eu
+  %p
+    = f.label :fr
+    %br/
+    = f.check_box :fr
+  %p
+    = f.label :en
+    %br/
+    = f.check_box :en
+  %p
+    = f.label :news_picture
+    %br/
+    = f.file_field :picture
+    
+  %p= f.submit

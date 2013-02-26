@@ -2,6 +2,10 @@ class Event < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title_with_id, use: [:slugged, :history]
   
+  #GoogleMaps
+  acts_as_gmappable :check_process => false, :checker => "gmaps"
+  
+  
   attr_accessible :address, :cancel_message, :des_en, :des_es, :des_eu, :des_fr, 
   :email, :finish_date, :phone, :place, :price, :province, :start_date, 
   :tickets, :title, :title_en, :title_es, :title_eu, :title_fr, :town,
@@ -12,6 +16,7 @@ class Event < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :comments, :dependent => :destroy
   has_many :translations, :dependent => :destroy
+  has_many :microposts, :dependent => :destroy
   
   #validates_datetime :finish_date, :after => :start_date
   #validates_datetime :finish_date, :on_or_after => lambda { Date.current }
@@ -48,6 +53,12 @@ class Event < ActiveRecord::Base
     if title_es.empty? && title_eu.empty? && title_en.empty? && title_fr.empty?
       errors.add(:des_es, "Please fill in the title at least in one language")
     end
+  end
+  
+  #Sets GMaps properties
+  def gmaps4rails_address
+  #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
+    "#{self.address}, #{self.town}, #{self.province}"
   end
   
   protected

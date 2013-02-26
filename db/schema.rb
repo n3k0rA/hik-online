@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130208134552) do
+ActiveRecord::Schema.define(:version => 20130226162735) do
 
   create_table "alarms", :force => true do |t|
     t.integer  "user_id"
@@ -61,6 +61,27 @@ ActiveRecord::Schema.define(:version => 20130208134552) do
     t.datetime "updated_at",                 :null => false
   end
 
+  create_table "entries", :force => true do |t|
+    t.string   "title_es"
+    t.string   "title_eu"
+    t.string   "title_fr"
+    t.string   "title_en"
+    t.text     "body_es"
+    t.text     "body_eu"
+    t.text     "body_fr"
+    t.text     "body_en"
+    t.boolean  "es"
+    t.boolean  "eu"
+    t.boolean  "fr"
+    t.boolean  "en"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+  end
+
   create_table "events", :force => true do |t|
     t.datetime "start_date"
     t.datetime "finish_date"
@@ -78,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20130208134552) do
     t.text     "des_eu"
     t.text     "des_en"
     t.text     "des_fr"
-    t.integer  "views"
+    t.integer  "views",            :default => 0
     t.string   "title_es"
     t.string   "title_eu"
     t.string   "title_en"
@@ -94,6 +115,9 @@ ActiveRecord::Schema.define(:version => 20130208134552) do
     t.integer  "pic_file_size"
     t.datetime "pic_updated_at"
     t.string   "slug"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
   end
 
   add_index "events", ["slug"], :name => "index_events_on_slug"
@@ -163,6 +187,34 @@ ActiveRecord::Schema.define(:version => 20130208134552) do
   end
 
   add_index "receipts", ["notification_id"], :name => "index_receipts_on_notification_id"
+
+  create_table "reports", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "sponsors", :force => true do |t|
+    t.string   "title_es"
+    t.string   "title_eu"
+    t.string   "title_fr"
+    t.string   "title_en"
+    t.text     "body_es"
+    t.text     "body_eu"
+    t.text     "body_fr"
+    t.text     "body_en"
+    t.boolean  "es"
+    t.boolean  "eu"
+    t.boolean  "fr"
+    t.boolean  "en"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
 
   create_table "translations", :force => true do |t|
     t.integer  "user_id"

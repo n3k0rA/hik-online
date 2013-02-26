@@ -1,0 +1,41 @@
+- title "Sponsor"
+%p
+  %strong Title Es:
+  = @sponsor.title_es
+%p
+  %strong Title Eu:
+  = @sponsor.title_eu
+%p
+  %strong Title Fr:
+  = @sponsor.title_fr
+%p
+  %strong Title En:
+  = @sponsor.title_en
+%p
+  %strong Body Es:
+  = @sponsor.body_es
+%p
+  %strong Body Eu:
+  = @sponsor.body_eu
+%p
+  %strong Body Fr:
+  = @sponsor.body_fr
+%p
+  %strong Body En:
+  = @sponsor.body_en
+%p
+  %strong Es:
+  = @sponsor.es
+%p
+  %strong Eu:
+  = @sponsor.eu
+%p
+  %strong Fr:
+  = @sponsor.fr
+%p
+  %strong En:
+  = @sponsor.en
+%p
+  = link_to "Destroy", @sponsor, :confirm => 'Are you sure?', :method => :delete
+  |
+  =link_to "View All", sponsors_path

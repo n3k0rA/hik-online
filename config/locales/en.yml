@@ -255,4 +255,43 @@ en:
   activate: Activate
   edit_alarm: Edit alarm
 
+
+  #STATIC
+  #Home
+  home_title: What is Hikultura?
+  home_desc: It is a platfrom devised to gather all information related to 'what is going on' in the Basque Country. From organizer to attenders this site is driven by people like you.
+  #About
+  about: "Hikultura is a bunch of crazy people willing to change the world."
+  #Faq_USER
+  faq_1q: "I have forgotten my password"
+  faq_1a: 
+  faq_2q: "I don't want other users contacting me by message"
+  faq_2a:
+  faq_3q: "I want to stop certain user from messagging me"
+  faq_3a:
+  faq_4q: " How to stop following another user"
+  faq_4a:
+  faq_5q: "Why following someone?"
+  faq_5a:
+  faq_6q:  "A user is using my/our name"
+  faq_6a:
   
+  #COmo borro mi buenta?
+  #  
+  #faq_EVENT
+  # Como puedo crear un evento
+  # Como cancelar un evento
+  # Como borrar un evento
+  # Alguien ha subido un evento que organizo yo
+  # Han subido un evento con nuestro nombre
+  # PAra que sirve que me recuerden un evento?
+  # Los eventos no me son recordados
+  
+  #faq_TRADUCCION
+  #Puedo anadir traducciona  mi propio evento
+  # Anadi una traduccino y nunca fue publicada
+  # Acepte una traduccion y ahora no la quiero
+  
+  #faq_BADGE
+  # PAra que sirven los badges
+  # Como puedo saber los mios

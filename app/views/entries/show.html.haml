@@ -1,0 +1,41 @@
+- title "Entry"
+%p
+  %strong Title Es:
+  = @entry.title_es
+%p
+  %strong Title Eu:
+  = @entry.title_eu
+%p
+  %strong Title Fr:
+  = @entry.title_fr
+%p
+  %strong Title En:
+  = @entry.title_en
+%p
+  %strong Body Es:
+  = @entry.body_es
+%p
+  %strong Body Eu:
+  = @entry.body_eu
+%p
+  %strong Body Fr:
+  = @entry.body_fr
+%p
+  %strong Body En:
+  = @entry.body_en
+%p
+  %strong Es:
+  = @entry.es
+%p
+  %strong Eu:
+  = @entry.eu
+%p
+  %strong Fr:
+  = @entry.fr
+%p
+  %strong En:
+  = @entry.en
+%p
+  = link_to "Destroy", @entry, :confirm => 'Are you sure?', :method => :delete
+  |
+  \#{link_to "View All", entries_path}

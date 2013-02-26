@@ -1,0 +1,33 @@
+- title "Entries"
+%table
+  %tr
+    %th Title Es
+    %th Title Eu
+    %th Title Fr
+    %th Title En
+    %th Body Es
+    %th Body Eu
+    %th Body Fr
+    %th Body En
+    %th Es
+    %th Eu
+    %th Fr
+    %th En
+  - for entry in @entries
+    %tr
+      %td= entry.title_es
+      %td= entry.title_eu
+      %td= entry.title_fr
+      %td= entry.title_en
+      %td= entry.body_es
+      %td= entry.body_eu
+      %td= entry.body_fr
+      %td= entry.body_en
+      %td= entry.es
+      %td= entry.eu
+      %td= entry.fr
+      %td= entry.en
+      %td= link_to "Show", entry
+      %td= link_to "Edit", edit_entry_path(entry)
+      %td= link_to "Destroy", entry, :confirm => 'Are you sure?', :method => :delete
+%p= link_to "New Entry", new_entry_path

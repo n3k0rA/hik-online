@@ -1,0 +1,27 @@
+one:
+  title_es: MyString
+  title_eu: MyString
+  title_fr: MyString
+  title_en: MyString
+  body_es: MyText
+  body_eu: MyText
+  body_fr: MyText
+  body_en: MyText
+  es: false
+  eu: false
+  fr: false
+  en: false
+
+two:
+  title_es: MyString
+  title_eu: MyString
+  title_fr: MyString
+  title_en: MyString
+  body_es: MyText
+  body_eu: MyText
+  body_fr: MyText
+  body_en: MyText
+  es: false
+  eu: false
+  fr: false
+  en: false

@@ -4,6 +4,7 @@ class Micropost < ActiveRecord::Base
   belongs_to :user
   belongs_to :comment
   belongs_to :follow
+  belongs_to :event
   
   # Content ID
   # 1 = U place a comment in E

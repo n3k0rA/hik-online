@@ -1,0 +1,161 @@
+%h2.capital.theFont
+  =title I18n.t(:submit_similar)
+
+= form_for(@event) do |f|
+  - if @event.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@event.errors.count, "error")
+        =t :event_form_error
+        //prohibited this event from being saved:
+      %ul
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
+          
+          
+  #tabs
+    -if I18n.locale.to_s=="en" 
+      %ul
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+    -elsif I18n.locale.to_s=="eu" 
+      %ul
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+    -elsif I18n.locale.to_s=="fr" 
+      %ul
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+    -else
+      %ul
+        %li
+          =link_to I18n.t(:lang_spanish), '#tabs-1'
+        %li
+          =link_to I18n.t(:lang_basque), '#tabs-2'
+        %li
+          =link_to I18n.t(:lang_french), '#tabs-3'
+        %li
+          =link_to I18n.t(:lang_english), '#tabs-4'
+    
+    #tabs-1
+      %p
+        .field
+          = f.label "Titulo del Evento"
+          = f.text_field :title_es, :class=>"total_width", :value => @old_event.title_es
+        %br
+        .field
+          = f.label "Descripcion del Evento"
+          %br
+          = f.text_area :des_es, :rows => 15, :class=>"total_width", :value => @old_event.des_es
+    #tabs-2
+      %p
+        .field
+          = f.label "Ekitaldiaren Titulua"
+          = f.text_field :title_eu, :class=>"total_width", :value => @old_event.title_eu
+        %br
+        .field
+          = f.label "Ekitaldiaren Deskripzioa"
+          %br
+          = f.text_area :des_eu, :rows => 15, :class=>"total_width", :value => @old_event.des_eu
+    #tabs-3
+      %p
+        .field
+          = f.label "Titre de L'événement"
+          = f.text_field :title_fr, :class=>"total_width", :value => @old_event.title_fr
+        %br
+        .field
+          = f.label "Descripcion de L'événement"
+          %br
+          = f.text_area :des_fr, :rows => 15, :class=>"total_width", :value => @old_event.des_fr
+    #tabs-4
+      %p
+        .field
+          = f.label "Event Title"
+          = f.text_field :title_en, :class=>"total_width", :value => @old_event.title_en
+        %br
+        .field
+          = f.label "Event Description"
+          %br
+          = f.text_area :des_en, :rows => 15, :class=>"total_width", :value => @old_event.des_en
+        
+        
+        
+  
+  = f.label t :event_categories
+  - Category.all.each do |category|
+    .field
+      = check_box_tag "category_ids[]", category.id, @old_event.category_ids.include?(category.id)
+      = I18n.t("categories.#{category.name}")
+  
+    
+  .field
+    = f.label t :event_start_date
+    %br
+    = f.text_field :start_date, :class=>"datetime_box", :size=>"17", :value => @old_event.start_date
+  .field
+    = f.label t :event_finish_date
+    %br
+    = f.text_field :finish_date, :class=>"datetime_box", :size=>"17", :value => @old_event.finish_date
+    
+  .field
+    = f.label t :event_place
+    %br
+    = f.text_field :place, :value => @old_event.place
+  .field
+    = f.label t :event_address
+    %br
+    = f.text_field :address, :value => @old_event.address
+  .field
+    = f.label t :event_town
+    %br
+    = f.text_field :town, :class => "town_autocomplete", :value => @old_event.town
+  .field
+    = f.label t :event_province
+    %br
+    = select(:event, :province, Event::PROVINCES.collect {|d| [I18n.t(d), d]}, :selected => @old_event.province)
+    
+  .field
+    = f.label t :event_price
+    %br
+    = f.number_field :price, :value => @old_event.price
+
+  .field
+    = f.label t :email
+    %br
+    = f.email_field :email, :value => @old_event.email
+  .field
+    = f.label t :event_website
+    %br
+    = f.text_field :website, :value => @old_event.website
+  .field
+    = f.label t :event_phone
+    %br
+    = f.telephone_field :phone, :value => @old_event.phone
+  .field
+    = f.label :Tickets_Online
+    %br
+    = f.telephone_field :tickets, :value => @old_event.tickets
+  %p
+    = f.label t :event_pic
+    %br
+    = f.file_field :pic, :value => @old_event.pic_file_name
+  .actions
+    = f.submit

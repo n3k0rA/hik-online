@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   
-  after_filter :create_micropost, :only => [:update]
+  after_filter :create_micropost, :only => [:update, :cancel]
   
   # GET /events
   # GET /events.json
@@ -18,9 +18,18 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-    #@event.views = @event.views + 1
+    @event.views += 1
     @event.save
     @comment = Comment.new(:event => @event)
+    @json = @event.to_gmaps4rails do |event, marker|
+      marker.picture({
+              :picture => "http://hik-fyp.heroku.com/assets/goazen_hikultura%20com_euskal_herriko_kultura-7049c7c97025437194e3f748ea8d5782.png",
+              :width => 32,
+              :height => 32
+            })
+      marker.json({ :description => @event.address })
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
@@ -36,6 +45,12 @@ class EventsController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @event }
     end
+  end
+  
+  # Creates a new event with same parameters of an existing one
+  def resubmit
+    @old_event = Event.find(params[:id])
+    @event = Event.new
   end
 
   # GET /events/1/edit
@@ -88,7 +103,7 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     if (@event.users.empty? || !@event.approved)
-      @event.categories.delete
+      @event.categories.clear
       @event.destroy
       respond_to do |format|
         format.html { redirect_to events_url }
@@ -103,6 +118,7 @@ class EventsController < ApplicationController
   end
   
   def cancel
+    @content = "7"
     @event = Event.find(params[:id])
   end
   

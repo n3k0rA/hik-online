@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui-1.9.2.custom.min
+//= require gmaps4rails/gmaps4rails.base
+//= require gmaps4rails/gmaps4rails.googlemaps
 //= require facebook
 //= require jquery-ui-timepicker-addon
 //= require town_autocomplete
@@ -20,6 +22,8 @@
 //= require datetime_format
 //= require temp
 //= require_directory ./datepicker
+//= require_directory ./home_transitions
+
 
 
 

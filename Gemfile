@@ -7,7 +7,7 @@ gem 'rails', '3.2.11'
 
 group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
-
+  gem "nifty-generators"
 end
 
 group :production do
@@ -47,8 +47,9 @@ gem 'hirb'
 gem 'mailboxer'
 gem 'kaminari'
 gem 'simple_form'
-
-
+gem 'will_paginate'
+gem 'gmaps4rails'
+gem 'randumb'
 
 
 
@@ -66,3 +67,5 @@ gem 'simple_form'
 
 # To use debugger
 # gem 'debugger'
+
+gem "mocha", :group => :test
